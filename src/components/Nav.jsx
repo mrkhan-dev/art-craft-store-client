@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 const Nav = () => {
   const [theme, setTheme] = useState("light");
@@ -23,19 +23,55 @@ const Nav = () => {
         <NavLink
           className={({isActive}) =>
             isActive
-              ? "text-md font-semibold px-5 py-3 border-b-4 border-[#1DD100] text-[#1DD100]"
-              : "text-md font-semibold text-[#131313CC]"
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              : "text-lg font-semibold "
           }
           to="/"
         >
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({isActive}) =>
+            isActive
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              : "text-lg font-semibold "
+          }
+          to="all_art"
+        >
+          All Art & craft
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({isActive}) =>
+            isActive
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              : "text-lg font-semibold "
+          }
+          to="add_craft"
+        >
+          Add Craft item
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({isActive}) =>
+            isActive
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              : "text-lg font-semibold "
+          }
+          to="my_craft"
+        >
+          My Art & Craft List
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-lg fixed z-10">
+    <div className="navbar bg-base-100 shadow-lg fixed z-10 px-16">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,8 +83,8 @@ const Nav = () => {
               stroke="currentColor"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                // strokeLinecap="round"
+                // strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
               />
@@ -56,25 +92,30 @@ const Nav = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2  w-52"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {navLink}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className=" text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {/* user profile */}
+        <div className="mr-2 cursor-pointer">
+          <img
+            className="h-12 w-12 rounded-full"
+            src="https://i.pinimg.com/736x/70/8e/07/708e07ee6cdde76befcc841ee92a8c6b.jpg"
+            alt=""
+          />
+        </div>
+        <Link to="sign_up" className="btn">
+          Sign Up
+        </Link>
         {/* theme */}
-        <label className="swap swap-rotate">
+        <label className="swap swap-rotate ml-2">
           {/* this hidden checkbox controls the state */}
           <input
             onChange={handleThem}
