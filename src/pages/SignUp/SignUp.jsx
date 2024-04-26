@@ -3,10 +3,15 @@ import image from "../../assets/Humaaans - Wireframe.png";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {FaRegEye, FaRegEyeSlash} from "react-icons/fa";
+import UseAuth from "../../Hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [signUpError, setSignUpError] = useState();
   const [showPassword, setShowPassword] = useState(null);
+
+  const {createUser} = UseAuth();
+
   const {
     register,
     handleSubmit,
@@ -14,7 +19,7 @@ const SignUp = () => {
   } = useForm();
 
   const handleForm = (data) => {
-    const {password} = data;
+    const {email, password} = data;
 
     if (password.length < 6) {
       setSignUpError("Password must be 6 character or longer");
@@ -23,6 +28,16 @@ const SignUp = () => {
       setSignUpError("Password must be one uppercase & lowercase character");
       return;
     }
+    setSignUpError("");
+    // create user
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+        toast.success("Sign Up Successful");
+      })
+      .catch(() => {
+        toast.error("This email already in use");
+      });
   };
 
   return (
