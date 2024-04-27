@@ -1,8 +1,20 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
+import UseAuth from "../Hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const Nav = () => {
   const [theme, setTheme] = useState("light");
+
+  const {user, logOut} = UseAuth();
+
+  const handleSignOut = () => {
+    logOut().hen((result) => {
+      toast.success("Logout Successful");
+      console.log(result);
+    });
+  };
+
   const handleThem = (e) => {
     if (e.target.checked) {
       setTheme("sunset");
@@ -104,16 +116,50 @@ const Nav = () => {
       </div>
       <div className="navbar-end">
         {/* user profile */}
-        <div className="mr-2 cursor-pointer">
+        {/* <div className="mr-2 cursor-pointer">
           <img
             className="h-12 w-12 rounded-full"
             src="https://i.pinimg.com/736x/70/8e/07/708e07ee6cdde76befcc841ee92a8c6b.jpg"
             alt=""
           />
-        </div>
-        <Link to="sign_up" className="btn">
-          Sign Up
-        </Link>
+        </div> */}
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li>
+                <button onClick={handleSignOut}>Logout</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to="sign_up" className="btn">
+            Sign Up
+          </Link>
+        )}
         {/* theme */}
         <label className="swap swap-rotate ml-2">
           {/* this hidden checkbox controls the state */}
