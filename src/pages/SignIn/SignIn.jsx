@@ -1,42 +1,32 @@
-import {Link} from "react-router-dom";
-import image from "../../assets/authentication-1-3.png";
+import image from "../../assets/loginPageImage.png";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
-import {FaRegEye, FaRegEyeSlash} from "react-icons/fa";
 import UseAuth from "../../Hooks/UseAuth";
+import {useState} from "react";
 import toast from "react-hot-toast";
+import {Link} from "react-router-dom";
+import {FaRegEye, FaRegEyeSlash} from "react-icons/fa";
+import SocialLogin from "../../SocialLogin/SocialLogin";
 
-const SignUp = () => {
-  const [signUpError, setSignUpError] = useState();
+const SignIn = () => {
   const [showPassword, setShowPassword] = useState(null);
-
-  const {createUser} = UseAuth();
+  const {signInUser} = UseAuth();
 
   const {
     register,
     handleSubmit,
     formState: {errors},
   } = useForm();
-
   const handleForm = (data) => {
     const {email, password} = data;
 
-    if (password.length < 6) {
-      setSignUpError("Password must be 6 character or longer");
-      return;
-    } else if (!/^(?=.*[a-z])(?=.*[A-Z]).*$/.test(password)) {
-      setSignUpError("Password must be one uppercase & lowercase character");
-      return;
-    }
-    setSignUpError("");
-    // create user
-    createUser(email, password)
+    // sign in user
+    signInUser(email, password)
       .then((result) => {
         console.log(result);
         toast.success("Sign Up Successful");
       })
       .catch(() => {
-        toast.error("This email already in use");
+        toast.error("Invalid email or password");
       });
   };
 
@@ -54,26 +44,9 @@ const SignUp = () => {
         <h1 className="text-center text-4xl">Sign Up for better experience</h1>
         <p className="text-center text-lg">
           Already have an account?
-          <Link to="/sign_in"> Sign In </Link>
+          <Link> Sign Up </Link>
         </p>
         <form onSubmit={handleSubmit(handleForm)} className="ml-4">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              className="input input-bordered"
-              {...register("name", {required: true})}
-            />
-            {errors.name && (
-              <span className="text-[#FF900E] text-sm mt-1 ml-1">
-                This field is required!
-              </span>
-            )}
-          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -91,17 +64,7 @@ const SignUp = () => {
               </span>
             )}
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Photo</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Photo URL"
-              name="name"
-              className="input input-bordered"
-            />
-          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Password</span>
@@ -129,18 +92,14 @@ const SignUp = () => {
             <input
               className="bg-[#ECE3F0] input mt-4 text-lg cursor-pointer"
               type="submit"
-              value="Sign Up"
+              value="Sign In"
             />
           </div>
         </form>
-        {signUpError && (
-          <p className="text-center text-sm mt-2 text-[#FF900E] mb-3">
-            {signUpError}
-          </p>
-        )}
+        <SocialLogin />
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;
