@@ -37,8 +37,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto md:flex mt-16 ">
-      <div className="w-1/2">
+    <div className="md:max-w-7xl mx-auto md:flex mt-16 ">
+      <div className="md:w-1/2">
         <img
           className="w-full md:h-[469px] rounded-l-lg bg-cover border bg-slate-400"
           src={image}
@@ -46,13 +46,13 @@ const SignIn = () => {
         />
       </div>
       {/* form */}
-      <div className="md: w-1/2">
+      <div className="md:w-1/2">
         <h1 className="text-center text-4xl">Sign Up for better experience</h1>
         <p className="text-center text-lg">
           Already have an account?
           <Link> Sign Up </Link>
         </p>
-        <form onSubmit={handleSubmit(handleForm)} className="ml-4">
+        <form onSubmit={handleSubmit(handleForm)} className="md:ml-4">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
 import ErrorPage from "../pages/ErrorPage";
+import AddCraft from "../pages/AddCraft/AddCraft";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "add_craft",
+        element: <AddCraft />,
       },
       {
         path: "sign_up",
