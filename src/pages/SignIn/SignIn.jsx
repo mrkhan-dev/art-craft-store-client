@@ -3,13 +3,16 @@ import {useForm} from "react-hook-form";
 import UseAuth from "../../Hooks/UseAuth";
 import {useState} from "react";
 import toast from "react-hot-toast";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {FaRegEye, FaRegEyeSlash} from "react-icons/fa";
 import SocialLogin from "../../SocialLogin/SocialLogin";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(null);
   const {signInUser} = UseAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -23,6 +26,9 @@ const SignIn = () => {
     signInUser(email, password)
       .then((result) => {
         console.log(result);
+        if (result.user) {
+          navigate(location?.state || "/");
+        }
         toast.success("Sign Up Successful");
       })
       .catch(() => {

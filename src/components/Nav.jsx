@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 import UseAuth from "../Hooks/UseAuth";
 import toast from "react-hot-toast";
+import {LuUserCircle} from "react-icons/lu";
 
 const Nav = () => {
   const [theme, setTheme] = useState("light");
@@ -10,7 +11,7 @@ const Nav = () => {
 
   const handleSignOut = () => {
     logOut().hen((result) => {
-      toast.success("Logout Successful");
+      toast.success("Logged Out");
       console.log(result);
     });
   };
@@ -124,18 +125,22 @@ const Nav = () => {
           />
         </div> */}
         {user ? (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
+          <div
+            className="dropdown dropdown-end tooltip tooltip-left rounded-full mr-1  border cursor-pointer"
+            data-tip={user.displayName}
+          >
+            <div tabIndex={0} role="button">
+              {user.photoURL ? (
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  className="h-12 w-12 rounded-full flex justify-center items-center"
+                  src={user.photoURL}
                 />
-              </div>
+              ) : (
+                <LuUserCircle
+                  className="h-12 w-12 tooltip tooltip-bottom"
+                  data-tip={user.displayName}
+                />
+              )}
             </div>
             <ul
               tabIndex={0}
@@ -147,9 +152,7 @@ const Nav = () => {
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li>
-                <a>Settings</a>
-              </li>
+
               <li>
                 <button onClick={handleSignOut}>Logout</button>
               </li>

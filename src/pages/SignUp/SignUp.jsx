@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import image from "../../assets/authentication-1-3.png";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
@@ -10,7 +10,10 @@ const SignUp = () => {
   const [signUpError, setSignUpError] = useState();
   const [showPassword, setShowPassword] = useState(null);
 
-  const {createUser} = UseAuth();
+  const {createUser, updateUserProfile} = UseAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -19,7 +22,7 @@ const SignUp = () => {
   } = useForm();
 
   const handleForm = (data) => {
-    const {email, password} = data;
+    const {email, password, name, photo} = data;
 
     if (password.length < 6) {
       setSignUpError("Password must be 6 character or longer");
@@ -31,8 +34,10 @@ const SignUp = () => {
     setSignUpError("");
     // create user
     createUser(email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        updateUserProfile(name, photo).then(() => {
+          navigate(location?.state || "/");
+        });
         toast.success("Sign Up Successful");
       })
       .catch(() => {
@@ -98,8 +103,9 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Photo URL"
-              name="name"
+              name="photo"
               className="input input-bordered"
+              {...register("photo")}
             />
           </div>
           <div className="form-control">

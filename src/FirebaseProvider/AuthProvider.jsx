@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import {createContext, useEffect, useState} from "react";
 import auth from "../FirebaseConfig/Firebase.config";
@@ -40,6 +41,14 @@ const AuthProvider = ({children}) => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  // update profile
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
   // sign out
   const logOut = () => {
     setUser(null);
@@ -61,6 +70,7 @@ const AuthProvider = ({children}) => {
     signInUser,
     googleSingIn,
     githubSignIn,
+    updateUserProfile,
     logOut,
   };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
