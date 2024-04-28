@@ -51,7 +51,7 @@ const Nav = () => {
               ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
               : "text-lg font-semibold "
           }
-          to="all_art"
+          to="allCraft"
         >
           All Art & craft
         </NavLink>
