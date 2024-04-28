@@ -100,12 +100,15 @@ const AddCraft = () => {
               <label className="label">
                 <span className="label-text">Customization</span>
               </label>
-              <input
+              <select
+                name="customization"
                 type="text"
                 placeholder="Customization"
-                name="customization"
-                className="input input-bordered"
-              />
+                className="select select-bordered"
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </select>
             </div>
           </div>
           {/* part 2 */}

@@ -15,8 +15,19 @@ const CraftDetails = () => {
   }, [id]);
 
   return (
-    <div>
-      <h1>{item.name}</h1>
+    <div className="card lg:card-side bg-base-100 shadow-xl lg:max-w-7xl mx-auto lg:mt-6 gap-36">
+      <figure>
+        <img className="md:h-96" src={item.image} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{item.name}</h2>
+        <p>Category : {item.category}</p>
+        <p>Price : {item.price}</p>
+        <p>Stock Status {item.stockStatus}</p>
+        <p>Rating : {item.rating}</p>
+        <p>Processing Time: {item.processingTime}</p>
+        <p> Descriptions : {item.description}</p>
+      </div>
     </div>
   );
 };
