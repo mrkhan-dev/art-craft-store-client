@@ -1,8 +1,18 @@
-import Swal from "sweetalert2";
-import UseAuth from "../../Hooks/UseAuth";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
-const AddCraft = () => {
-  const {user} = UseAuth();
+const Update = () => {
+  const {id} = useParams();
+  const [item, setItem] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/singleItem/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setItem(data);
+      });
+  }, [id]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -16,10 +26,8 @@ const AddCraft = () => {
     const rating = form.rating.value;
     const processingTime = form.processingTime.value;
     const description = form.description.value;
-    const author = user.displayName;
-    const email = user.email;
 
-    const data = {
+    const formData = {
       name,
       category,
       price,
@@ -29,29 +37,18 @@ const AddCraft = () => {
       rating,
       processingTime,
       description,
-      author,
-      email,
     };
-    console.log(data);
 
-    // send data to server side
-    fetch("http://localhost:5000/added_craft", {
-      method: "POST",
+    fetch(`http://localhost:5000/updateCraft/${id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Item added successful",
-            // text: "You clicked the button!",
-            icon: "success",
-          });
-        }
+        console.log(data);
       });
   };
 
@@ -72,6 +69,7 @@ const AddCraft = () => {
                 placeholder="Item Name"
                 name="name"
                 className="input input-bordered"
+                defaultValue={item.name}
               />
             </div>
             <div className="form-control">
@@ -83,6 +81,7 @@ const AddCraft = () => {
                 placeholder="Sub Category"
                 name="category"
                 className="input input-bordered"
+                defaultValue={item.category}
               />
             </div>
             <div className="form-control">
@@ -94,6 +93,7 @@ const AddCraft = () => {
                 placeholder="Price"
                 name="price"
                 className="input input-bordered"
+                defaultValue={item.price}
               />
             </div>
             <div className="form-control">
@@ -105,6 +105,7 @@ const AddCraft = () => {
                 placeholder="Customization"
                 name="customization"
                 className="input input-bordered"
+                defaultValue={item.customization}
               />
             </div>
           </div>
@@ -119,6 +120,7 @@ const AddCraft = () => {
                 placeholder="Stock Status"
                 name="stockStatus"
                 className="input input-bordered"
+                defaultValue={item.stockStatus}
               />
             </div>
             <div className="form-control">
@@ -130,6 +132,7 @@ const AddCraft = () => {
                 placeholder="Image URL"
                 name="image"
                 className="input input-bordered"
+                defaultValue={item.image}
               />
             </div>
             <div className="form-control">
@@ -141,6 +144,7 @@ const AddCraft = () => {
                 placeholder="Rating"
                 name="rating"
                 className="input input-bordered"
+                defaultValue={item.rating}
               />
             </div>
             <div className="form-control">
@@ -152,6 +156,7 @@ const AddCraft = () => {
                 placeholder="processing time"
                 name="processingTime"
                 className="input input-bordered"
+                defaultValue={item.processingTime}
               />
             </div>
           </div>
@@ -165,13 +170,14 @@ const AddCraft = () => {
             placeholder="Short description"
             name="description"
             className="input input-bordered"
+            defaultValue={item.description}
           />
         </div>
         <div className="form-control">
           <input
             className="bg-[#E47E98] text-white input mt-4 text-lg cursor-pointer"
             type="submit"
-            value="Add"
+            value="Update"
           />
         </div>
       </form>
@@ -179,4 +185,4 @@ const AddCraft = () => {
   );
 };
 
-export default AddCraft;
+export default Update;
