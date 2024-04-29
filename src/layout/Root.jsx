@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 const Root = () => {
   return (
     <div>
-      <div className="h-24">
+      <div className="h-[91px]">
         <Nav />
       </div>
       <Outlet />
