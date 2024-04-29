@@ -36,7 +36,7 @@ const Nav = () => {
         <NavLink
           className={({isActive}) =>
             isActive
-              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#E47E98] text-[#E47E98]"
               : "text-lg font-semibold "
           }
           to="/"
@@ -48,7 +48,7 @@ const Nav = () => {
         <NavLink
           className={({isActive}) =>
             isActive
-              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
+              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#E47E98] text-[#E47E98]"
               : "text-lg font-semibold "
           }
           to="allCraft"
@@ -56,30 +56,34 @@ const Nav = () => {
           All Art & craft
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({isActive}) =>
-            isActive
-              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
-              : "text-lg font-semibold "
-          }
-          to="add_craft"
-        >
-          Add Craft item
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({isActive}) =>
-            isActive
-              ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#FF900E] text-[#FF900E]"
-              : "text-lg font-semibold "
-          }
-          to="my_craft"
-        >
-          My Art & Craft List
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({isActive}) =>
+              isActive
+                ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#E47E98] text-[#E47E98]"
+                : "text-lg font-semibold "
+            }
+            to="add_craft"
+          >
+            Add Craft item
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
+          <NavLink
+            className={({isActive}) =>
+              isActive
+                ? "text-lg font-semibold px-5 py-3 border-b-4 rounded-none border-[#E47E98] text-[#E47E98]"
+                : "text-lg font-semibold "
+            }
+            to="my_craft"
+          >
+            My Art & Craft List
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -116,14 +120,6 @@ const Nav = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        {/* user profile */}
-        {/* <div className="mr-2 cursor-pointer">
-          <img
-            className="h-12 w-12 rounded-full"
-            src="https://i.pinimg.com/736x/70/8e/07/708e07ee6cdde76befcc841ee92a8c6b.jpg"
-            alt=""
-          />
-        </div> */}
         {user ? (
           <div
             className="dropdown dropdown-end tooltip tooltip-left rounded-full mr-1  border cursor-pointer"

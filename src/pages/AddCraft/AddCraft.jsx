@@ -78,12 +78,22 @@ const AddCraft = () => {
               <label className="label">
                 <span className="label-text">Category</span>
               </label>
-              <input
-                type="text"
-                placeholder="Sub Category"
+              <select
                 name="category"
-                className="input input-bordered"
-              />
+                type="text"
+                className="select select-bordered"
+                required
+              >
+                <option disabled selected>
+                  Sub Category
+                </option>
+                <option>Landscape Painting</option>
+                <option>Portrait Drawing</option>
+                <option>Watercolor Painting</option>
+                <option>Oil Painting</option>
+                <option>Charcoal Sketching</option>
+                <option>Cartoon Drawing</option>
+              </select>
             </div>
             <div className="form-control">
               <label className="label">
@@ -105,6 +115,7 @@ const AddCraft = () => {
                 type="text"
                 placeholder="Customization"
                 className="select select-bordered"
+                required
               >
                 <option>Yes</option>
                 <option>No</option>
@@ -133,6 +144,7 @@ const AddCraft = () => {
                 placeholder="Image URL"
                 name="image"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">

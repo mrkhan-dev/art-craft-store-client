@@ -9,6 +9,7 @@ import MyCraftList from "../pages/MyCraftList/MyCraftList";
 import CraftDetails from "../pages/CraftDetails/CraftDetails";
 import Update from "../pages/UpdateCraft/Update";
 import AllCraft from "../pages/AllArt&Craft/AllCraft";
+import ProtectedRoute from "../components/Protected/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +23,19 @@ const router = createBrowserRouter([
       },
       {
         path: "add_craft",
-        element: <AddCraft />,
+        element: (
+          <ProtectedRoute>
+            <AddCraft />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "my_craft",
-        element: <MyCraftList />,
+        element: (
+          <ProtectedRoute>
+            <MyCraftList />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "allCraft",
