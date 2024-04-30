@@ -5,20 +5,20 @@ import {Link} from "react-router-dom";
 
 const ArtAndCraft = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
   useEffect(() => {
-    fetch("http://localhost:5000/allData")
+    fetch("https://assignment-10-server-psi-lovat.vercel.app/allData")
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
       });
   }, []);
   return (
-    <div className="lg:max-w-7xl mx-auto">
-      <div className="grid grid-cols-3 mt-12 gap-24">
+    <div className="lg:max-w-[1440px] mx-auto">
+      <p className="text-center text-4xl font-bold mt-12">Atr & Craft</p>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-12 gap-24">
         {items.slice(0, 6).map((item) => (
           <div key={item._id}>
-            <div className="card card-compact w-96 bg-base-100 shadow-xl border">
+            <div className="card card-compact w-96 shadow-xl border">
               <img
                 className="rounded-xl md:h-[240px] bg-cover"
                 src={

@@ -13,8 +13,6 @@ const AllCraft = () => {
             <th>Name</th>
             <th>Price</th>
             <th>Rating</th>
-            <th>Stock Status</th>
-            <th>Customization</th>
           </tr>
         </thead>
         <tbody>
@@ -23,8 +21,6 @@ const AllCraft = () => {
               <td>{data.name}</td>
               <td>{data.price}</td>
               <td>{data.rating}</td>
-              <td>{data.stockStatus}</td>
-              <td>{data.customization}</td>
               <td>
                 <Link to={`/craftDetails/${data._id}`}>
                   <button className="btn bg-[#E47E98] text-white">

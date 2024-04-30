@@ -114,7 +114,9 @@ const Nav = () => {
             {navLink}
           </ul>
         </div>
-        <a className=" text-xl">daisyUI</a>
+        <a className=" text-2xl font-bold gap-0 text-[#da49a7]">
+          Colorful<span className="text-[#0d6]">Expressions</span>
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>

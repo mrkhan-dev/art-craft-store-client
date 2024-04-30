@@ -7,7 +7,7 @@ import SliderImage2 from "../../assets/sliderImage2.jpg";
 import SliderImage3 from "../../assets/sliderImage3.jpg";
 const Banner = () => {
   return (
-    <div className="px-12 bg-[#eddfe3]">
+    <div className="lg:px-12 bg-[#eddfe3]">
       <Swiper
         modules={[EffectFade, Autoplay]}
         className="mySwiper"

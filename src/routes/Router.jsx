@@ -10,6 +10,7 @@ import CraftDetails from "../pages/CraftDetails/CraftDetails";
 import Update from "../pages/UpdateCraft/Update";
 import AllCraft from "../pages/AllArt&Craft/AllCraft";
 import ProtectedRoute from "../components/Protected/ProtectedRoute";
+import ShowCategory from "../components/ShowCategory/ShowCategory";
 
 const router = createBrowserRouter([
   {
@@ -40,11 +41,20 @@ const router = createBrowserRouter([
       {
         path: "allCraft",
         element: <AllCraft />,
-        loader: () => fetch("http://localhost:5000/allData"),
+        loader: () =>
+          fetch("https://assignment-10-server-psi-lovat.vercel.app/allData"),
       },
       {
         path: "craftDetails/:id",
-        element: <CraftDetails />,
+        element: (
+          <ProtectedRoute>
+            <CraftDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "showCategories/:category",
+        element: <ShowCategory />,
       },
       {
         path: "UpdateCraft/:id",

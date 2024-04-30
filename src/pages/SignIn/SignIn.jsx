@@ -47,10 +47,13 @@ const SignIn = () => {
       </div>
       {/* form */}
       <div className="md:w-1/2">
-        <h1 className="text-center text-4xl">Sign Up for better experience</h1>
+        <h1 className="text-center text-4xl">Sign In</h1>
         <p className="text-center text-lg">
           Already have an account?
-          <Link> Sign Up </Link>
+          <Link className="underline font-semibold text-[#0d6]" to="/sign_up">
+            {" "}
+            Sign Up{" "}
+          </Link>
         </p>
         <form onSubmit={handleSubmit(handleForm)} className="md:ml-4">
           <div className="form-control">

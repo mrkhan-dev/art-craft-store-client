@@ -6,7 +6,7 @@ const Update = () => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/singleItem/${id}`)
+    fetch(`https://assignment-10-server-psi-lovat.vercel.app/singleItem/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -39,13 +39,16 @@ const Update = () => {
       description,
     };
 
-    fetch(`http://localhost:5000/updateCraft/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      `https://assignment-10-server-psi-lovat.vercel.app/updateCraft/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

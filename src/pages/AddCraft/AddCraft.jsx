@@ -32,10 +32,8 @@ const AddCraft = () => {
       author,
       email,
     };
-    console.log(data);
-
     // send data to server side
-    fetch("http://localhost:5000/added_craft", {
+    fetch("https://assignment-10-server-psi-lovat.vercel.app/added_craft", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,7 +42,6 @@ const AddCraft = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Item added successful",

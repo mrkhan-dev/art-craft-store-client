@@ -59,7 +59,10 @@ const SignUp = () => {
         <h1 className="text-center text-4xl">Sign Up for better experience</h1>
         <p className="text-center text-lg">
           Already have an account?
-          <Link to="/sign_in"> Sign In </Link>
+          <Link className="text-[#0d6] font-semibold underline" to="/sign_in">
+            {" "}
+            Sign In{" "}
+          </Link>
         </p>
         <form onSubmit={handleSubmit(handleForm)} className="ml-4">
           <div className="form-control">

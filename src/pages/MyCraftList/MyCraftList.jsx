@@ -5,21 +5,40 @@ import {CiEdit} from "react-icons/ci";
 import {MdDelete} from "react-icons/md";
 import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
+import "react-tooltip/dist/react-tooltip.css";
+import {Tooltip} from "react-tooltip";
 
 const MyCraftList = () => {
   const {user} = UseAuth() || {};
   const [craft, setCraft] = useState([]);
   const [remove, setRemove] = useState(false);
-  console.log(craft);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myCraft/${user?.email}`)
+    fetch(
+      `https://assignment-10-server-psi-lovat.vercel.app/myCraft/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
         setCraft(data);
       });
   }, [user, remove]);
+
+  const handleFilter = (filter) => {
+    if (filter === "customYes") {
+      const filterYeas = craft.filter(
+        (filtering) => filtering.customization === "Yes"
+      );
+      console.log(filterYeas);
+      setCraft(filterYeas);
+    } else if (filter === "customNo") {
+      const noFilter = craft.filter(
+        (filtering) => filtering.customization === "No"
+      );
+      setCraft(noFilter);
+      console.log(noFilter);
+    }
+  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -32,9 +51,12 @@ const MyCraftList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteItem/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://assignment-10-server-psi-lovat.vercel.app/deleteItem/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -54,21 +76,35 @@ const MyCraftList = () => {
   return (
     <div className="lg:max-w-7xl mx-auto">
       <h1 className="text-center mt-8 text-4xl font-bold">My Art & Craft</h1>
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-3 mt-4">
+      <div className="flex justify-end">
+        <details className="dropdown">
+          <summary className="m-1 btn">Filter</summary>
+          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <li onClick={() => handleFilter("customYes")}>
+              <span>Yes</span>
+            </li>
+            <li onClick={() => handleFilter("customNo")}>
+              <span>No</span>
+            </li>
+          </ul>
+        </details>
+      </div>
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-8 mt-4">
         {craft.map((item) => (
           <div key={item.id}>
-            <div className="card card-side bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-md">
               <figure>
                 <img
-                  className="md:h-[239px] md:w-[185]"
+                  className="md:h-[239px] md:w-[248px] lg:w-full px-12 rounded-md"
                   src={item.image}
                   alt="Movie"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title"> {item.name} </h2>
-                <p> {item.category} </p>
+                <p> Sub Category {item.category} </p>
                 <p> {item.stockStatus} </p>
+                <p>Customization : {item.customization}</p>
                 <p>{item.price}</p>
                 <p>{item.rating}</p>
                 <div className="card-actions justify-end">
@@ -80,12 +116,20 @@ const MyCraftList = () => {
                       <MdDelete className="h-6 w-6 text-[#EA4744]" />
                     </button>
                     <Link to={`/UpdateCraft/${item._id}`}>
-                      <button className="btn join-item">
+                      <button
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Update"
+                        className="btn join-item"
+                      >
                         <CiEdit className="h-8 w-8 text-[#3C393B]" />
                       </button>
                     </Link>
                     <Link to={`/craftDetails/${item._id}`}>
-                      <button className="btn join-item">
+                      <button
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="view"
+                        className="btn join-item"
+                      >
                         <FiEye className="h-8 w-8 text-[#E47E98]" />
                       </button>
                     </Link>
@@ -96,6 +140,7 @@ const MyCraftList = () => {
           </div>
         ))}
       </div>
+      <Tooltip id="my-tooltip" />
     </div>
   );
 };
