@@ -6,46 +6,19 @@ Welcome to ColorfulExpressions
 
 [ColorfulExpressions](https://art-and-craft-dc812.web.app/)
 
-### Features
+## Project Overview
 
-#### 1. properties cart and view property page :
+Welcome to my latest project, an Art and Craft Store website designed to showcase and sell unique handmade items. This platform allows users to register, authenticate, and list their own art for sale. The application is built with a focus on user experience, security, and seamless functionality.
 
-- Explore a curated selection of properties and view details information about each property.
+## Features
 
-#### 2. Authentication :
+User Authentication
 
-- Firebase Auth System
-- Email and password-Based Authentication
-- Google, facebook and GitHub Login integration
-- Register page with validation (password:Uppercase,Lowercase,Minimum length of 6 characters)
-- Login page with Error Handling
-- Deployed Website on Firebase
+- Secure user registration and login system.
+- Password encryption and secure session management.
+- Easy-to-use interface for users to add, edit, and delete their own art listings.
+- Detailed product pages with images, descriptions, and pricing.
 
-#### 3. Nabvar :
+## Technologies
 
-- Unique Design
-- Sections Home Update Profile (Private).user profile(Private) and (conditional)
-- User Profile display user img and name when logged in
-- implement Logout Functionality
-
-#### 4. Slider :
-
-- Utilizes Swiper Slider
-- 3 Swiper Slider
-
-#### 5. Footer :
-
-- Include all relevant information and eye-catching design
-
-#### 6. 404 Page:
-
-- Invalid link for error page
-
-#### 7. Dynamic Title :
-
-- Dynamic title for every page
-
-#### 9. External Packages :
-
-- Utilized `react tool tip` package for animations
-- Utilized `swiper slider` package for animations
+[![My Skills](https://skillicons.dev/icons?i=react,tailwind,javascript,nodejs,express,mongodb)](https://skillicons.dev)
